@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.example.liteeducation.data.model.Result" />
+        <import type="com.example.liteeducation.ui.RetryCallback" />
+        <variable
+            name="dataState"
+            type="Result" />
+        <variable
+            name="retryCallback"
+            type="RetryCallback" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:visibleGone="@{!dataState.successful}"
+    android:layout_margin="@dimen/margin_default">
+
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:visibleGone="@{dataState.loading}"
+        android:progressTint="@color/accent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_error_image"
+        android:layout_width="@dimen/image_server_error_width"
+        android:layout_height="@dimen/image_server_error_height"
+        android:src="@drawable/ic_network_error"
+        app:visibleGone="@{dataState.failed}"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/design_default_color_error"
+        tools:text="Error Message"
+        android:text="@{dataState.errorMessage}"
+        app:visibleGone="@{dataState.failed}"
+        android:layout_marginVertical="@dimen/margin_default"
+        app:layout_constraintTop_toBottomOf="@+id/iv_error_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_retry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_retry"
+        android:onClick="@{(v) -> retryCallback.retry()}"
+        app:visibleGone="@{dataState.failed}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_error_message"
+        app:layout_constraintStart_toStartOf="@id/tv_error_message"
+        app:layout_constraintEnd_toEndOf="@id/tv_error_message"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.example.liteeducation.data.model.Result" />
+
+        <import type="com.example.liteeducation.ui.RetryCallback" />
+
+        <variable
+            name="dataState"
+            type="Result" />
+
+        <variable
+            name="retryCallback"
+            type="RetryCallback" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.LearningMaterialFragment">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_learning_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_learning_material"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/recycler_view_padding"
+                android:paddingBottom="@dimen/recycler_view_padding"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:visibleGone="@{dataState.successful}"
+                tools:listitem="@layout/list_item_learning_material" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+        <include
+            layout="@layout/layout_data_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dataState="@{dataState}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:retryCallback="@{retryCallback}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

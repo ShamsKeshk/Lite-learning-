@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_learning_material"
+    app:startDestination="@id/learningMaterialFragment">
+
+    <fragment
+        android:id="@+id/learningMaterialFragment"
+        android:name="com.example.liteeducation.ui.LearningMaterialFragment"
+        android:label="LearningMaterialFragment"
+        tools:layout="@layout/fragment_learning_material"/>
+</navigation>

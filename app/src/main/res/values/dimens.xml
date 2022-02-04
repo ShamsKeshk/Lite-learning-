@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_default">16dp</dimen>
+    <dimen name="margin_default_primary_text">8dp</dimen>
+    <dimen name="margin_default_secondary_text">4dp</dimen>
+
+    <dimen name="image_material_item_list_width">60dp</dimen>
+    <dimen name="image_material_item_list_height">60dp</dimen>
+
+    <!-- CardView -->
+    <dimen name="card_view_corner_radius">8dp</dimen>
+    <dimen name="card_view_elevation">8dp</dimen>
+    <dimen name="card_view_margin">8dp</dimen>
+
+    <!-- Recycler View -->
+    <dimen name="recycler_view_padding">16dp</dimen>
+
+    <!-- Text Size -->
+    <dimen name="text_size_primary_text">16sp</dimen>
+    <dimen name="text_size_secondary_text">12sp</dimen>
+
+    <dimen name="image_server_error_width">60dp</dimen>
+    <dimen name="image_server_error_height">60dp</dimen>
+</resources>
