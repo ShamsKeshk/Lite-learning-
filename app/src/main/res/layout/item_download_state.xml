@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_download_state"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="@dimen/margin_default"
+        android:src="@drawable/ic_download_30"
+        android:layout_gravity="center"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar_download"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:indeterminate="false"
+        android:layout_margin="@dimen/margin_default"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        android:background="@drawable/circle_shape"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:max="100"
+        android:progress="65"
+        android:layout_gravity="center"/>
+
+</FrameLayout>
+</layout>
