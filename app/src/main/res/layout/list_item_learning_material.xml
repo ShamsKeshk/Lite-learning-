@@ -1,72 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-<com.google.android.material.card.MaterialCardView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/card_view_corner_radius"
-    app:cardElevation="@dimen/card_view_elevation"
-    android:layout_margin="@dimen/card_view_margin">
+    <data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+        <variable
+            name="downloadProgress"
+            type="Integer" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/card_view_margin"
+        app:cardCornerRadius="@dimen/card_view_corner_radius"
+        app:cardElevation="@dimen/card_view_elevation">
 
-        <ImageView
-            android:id="@+id/iv_learning_item_preview"
-            android:layout_width="@dimen/image_material_item_list_width"
-            android:layout_height="@dimen/image_material_item_list_height"
-            android:layout_margin="@dimen/margin_default"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_ondemand_video_60" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_learning_item_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default_primary_text"
-            android:textColor="@color/primary_text"
-            android:textSize="@dimen/text_size_primary_text"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_item_learning"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toEndOf="@+id/iv_learning_item_preview"
-            app:layout_constraintTop_toTopOf="@+id/iv_learning_item_preview"
-            tools:text="Name" />
+            <ImageView
+                android:id="@+id/iv_learning_item_preview"
+                android:layout_width="@dimen/image_material_item_list_width"
+                android:layout_height="@dimen/image_material_item_list_height"
+                android:layout_margin="@dimen/margin_default"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_ondemand_video_60" />
 
-        <TextView
-            android:id="@+id/tv_learning_item_type"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginVertical="@dimen/margin_default_primary_text"
-            android:layout_marginEnd="@dimen/margin_default"
-            android:textColor="@color/secondary_text"
-            android:textSize="@dimen/text_size_secondary_text"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_item_learning"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="@+id/tv_learning_item_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_learning_item_name"
-            tools:text="PDF" />
+            <TextView
+                android:id="@+id/tv_learning_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_default_primary_text"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_size_primary_text"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_item_learning"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@+id/iv_learning_item_preview"
+                app:layout_constraintTop_toTopOf="@+id/iv_learning_item_preview"
+                tools:text="Name" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_item_learning"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent=".7"/>
+            <TextView
+                android:id="@+id/tv_learning_item_type"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginVertical="@dimen/margin_default_primary_text"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/text_size_secondary_text"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_item_learning"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@+id/tv_learning_item_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_learning_item_name"
+                tools:text="PDF" />
 
-        <include
-            layout="@layout/item_download_state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/guideline_item_learning"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_item_learning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".7" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+            <include
+                layout="@layout/item_download_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:downloadProgress="@{downloadProgress}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline_item_learning"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </layout>
