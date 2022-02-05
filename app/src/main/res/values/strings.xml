@@ -3,4 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btn_retry">Retry again !!</string>
+    <string name="download_channel_name">download_resources_channel</string>
+    <string name="download_channel_id">download_resource_channel_id</string>
+    <string name="download_channel_description">To Display notification while download and resource, so you can keep tracking of it.</string>
+    <string name="download_notification_title">Lite Learning</string>
+    <string name="download_notification_description">Downloading %1$s in progress …</string>
 </resources>
