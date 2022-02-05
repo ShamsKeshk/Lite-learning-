@@ -5,6 +5,7 @@ sealed class Result<out R> {
     data class Success<out T>(val data: T): Result<T>()
     data class Error<out T>(val error: Throwable): Result<T>()
     class Loading<out T> : Result<T>()
+    class LoadingProgress<out T>(val progress: Int) : Result<T>()
 
     fun isLoading(): Boolean = this is Loading
 

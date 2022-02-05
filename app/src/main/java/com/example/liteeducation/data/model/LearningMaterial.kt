@@ -2,7 +2,12 @@ package com.example.liteeducation.data.model
 
 import com.example.liteeducation.R
 
-data class LearningMaterial(var id: Int, var type: String, var url: String, var name: String) {
+data class LearningMaterial(var id: Int,
+                            var type: String,
+                            var url: String,
+                            var name: String,
+                            @Transient
+                            var downloadState: Result<String>?) {
 
 }
 
