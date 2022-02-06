@@ -1,4 +1,4 @@
-package com.example.liteeducation.ui
+package com.example.liteeducation.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,13 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.*
-import com.example.liteeducation.BaseFragment
 import com.example.liteeducation.data.extentions.getProgressAsInt
 import com.example.liteeducation.data.extentions.putLearningMaterial
 import com.example.liteeducation.databinding.FragmentLearningMaterialBinding
-import com.example.liteeducation.data.model.LearningMaterial
-import com.example.liteeducation.data.model.Result
+import com.example.liteeducation.model.LearningMaterial
+import com.example.liteeducation.model.Result
 import com.example.liteeducation.data.remote.services.DownloadWorkManager
+import com.example.liteeducation.ui.interfaces.RetryCallback
+import com.example.liteeducation.ui.adapters.LearningMaterialAdapter
+import com.example.liteeducation.ui.viewmodel.LearningMaterialViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -24,7 +26,7 @@ import javax.inject.Inject
  */
 
 @AndroidEntryPoint
-class LearningMaterialFragment : BaseFragment() , LearningMaterialAdapter.LearningMaterialClickLister {
+class LearningMaterialFragment : Fragment() , LearningMaterialAdapter.LearningMaterialClickLister {
 
     companion object {
         /**

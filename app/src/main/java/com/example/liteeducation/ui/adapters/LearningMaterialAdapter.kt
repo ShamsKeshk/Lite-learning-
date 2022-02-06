@@ -1,4 +1,4 @@
-package com.example.liteeducation.ui
+package com.example.liteeducation.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.liteeducation.databinding.ListItemLearningMaterialBinding
-import com.example.liteeducation.data.model.LearningMaterial
-import com.example.liteeducation.data.model.LearningMaterialFactory
-import com.example.liteeducation.data.model.Result
-import com.example.liteeducation.data.model.getDownloadProgress
+import com.example.liteeducation.model.LearningMaterial
+import com.example.liteeducation.model.LearningMaterialFactory
+import com.example.liteeducation.model.Result
+import com.example.liteeducation.model.getDownloadProgress
 
 class LearningMaterialAdapter(val clickListener: LearningMaterialClickLister) : ListAdapter<LearningMaterial, LearningMaterialAdapter.ViewHolder>(
     DIFF_UTIL

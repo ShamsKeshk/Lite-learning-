@@ -1,7 +1,7 @@
 package com.example.liteeducation.data.local.utils
 
 import android.app.Application
-import com.example.liteeducation.data.model.LearningMaterial
+import com.example.liteeducation.model.LearningMaterial
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types

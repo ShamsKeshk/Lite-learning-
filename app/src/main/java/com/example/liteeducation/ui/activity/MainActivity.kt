@@ -1,7 +1,8 @@
-package com.example.liteeducation
+package com.example.liteeducation.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.liteeducation.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

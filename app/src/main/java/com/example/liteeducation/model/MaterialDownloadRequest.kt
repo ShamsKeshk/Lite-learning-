@@ -1,4 +1,4 @@
-package com.example.liteeducation.data.model
+package com.example.liteeducation.model
 
 import android.os.Parcel
 import android.os.Parcelable

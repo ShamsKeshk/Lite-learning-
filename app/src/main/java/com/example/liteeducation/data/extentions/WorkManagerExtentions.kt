@@ -2,7 +2,7 @@ package com.example.liteeducation.data.extentions
 
 import androidx.work.Data
 import androidx.work.WorkInfo
-import com.example.liteeducation.data.model.LearningMaterial
+import com.example.liteeducation.model.LearningMaterial
 import com.example.liteeducation.data.remote.services.DownloadWorkManager
 import com.squareup.moshi.Moshi
 

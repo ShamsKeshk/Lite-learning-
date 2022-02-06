@@ -1,4 +1,4 @@
-package com.example.liteeducation.data.notification
+package com.example.liteeducation.notification
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

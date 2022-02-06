@@ -1,4 +1,4 @@
-package com.example.liteeducation.data.model
+package com.example.liteeducation.model
 
 import com.example.liteeducation.R
 

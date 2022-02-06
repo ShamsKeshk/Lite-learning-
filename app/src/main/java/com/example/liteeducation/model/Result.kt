@@ -1,4 +1,4 @@
-package com.example.liteeducation.data.model
+package com.example.liteeducation.model
 
 sealed class Result<out R> {
 

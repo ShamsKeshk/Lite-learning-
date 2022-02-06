@@ -3,9 +3,9 @@
 
     <data>
 
-        <import type="com.example.liteeducation.data.model.Result" />
+        <import type="com.example.liteeducation.model.Result" />
 
-        <import type="com.example.liteeducation.ui.RetryCallback" />
+        <import type="com.example.liteeducation.ui.interfaces.RetryCallback" />
 
         <variable
             name="dataState"
@@ -13,14 +13,14 @@
 
         <variable
             name="retryCallback"
-            type="RetryCallback" />
+            type="com.example.liteeducation.ui.interfaces.RetryCallback" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.LearningMaterialFragment">
+        tools:context=".ui.fragment.LearningMaterialFragment">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_learning_data"

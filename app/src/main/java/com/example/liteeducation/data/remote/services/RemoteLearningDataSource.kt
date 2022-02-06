@@ -1,8 +1,6 @@
 package com.example.liteeducation.data.remote.services
 
-import com.example.liteeducation.data.model.LearningMaterial
-import retrofit2.Response
-import java.lang.Exception
+import com.example.liteeducation.model.LearningMaterial
 import javax.inject.Inject
 
 

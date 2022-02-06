@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.example.liteeducation.data.model.Result" />
-        <import type="com.example.liteeducation.ui.RetryCallback" />
+        <import type="com.example.liteeducation.model.Result" />
+        <import type="com.example.liteeducation.ui.interfaces.RetryCallback" />
         <variable
             name="dataState"
             type="Result" />
         <variable
             name="retryCallback"
-            type="RetryCallback" />
+            type="com.example.liteeducation.ui.interfaces.RetryCallback" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout

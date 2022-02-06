@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/learningMaterialFragment"
-        android:name="com.example.liteeducation.ui.LearningMaterialFragment"
+        android:name="com.example.liteeducation.ui.fragment.LearningMaterialFragment"
         android:label="LearningMaterialFragment"
         tools:layout="@layout/fragment_learning_material"/>
 </navigation>

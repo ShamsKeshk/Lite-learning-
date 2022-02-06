@@ -1,10 +1,10 @@
-package com.example.liteeducation.ui
+package com.example.liteeducation.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.liteeducation.data.model.LearningMaterial
-import com.example.liteeducation.data.model.Result
+import com.example.liteeducation.model.LearningMaterial
+import com.example.liteeducation.model.Result
 import com.example.liteeducation.data.repository.LearningMaterialRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

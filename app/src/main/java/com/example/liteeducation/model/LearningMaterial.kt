@@ -1,8 +1,4 @@
-package com.example.liteeducation.data.model
-
-import androidx.work.Data
-import com.example.liteeducation.R
-import com.squareup.moshi.Moshi
+package com.example.liteeducation.model
 
 data class LearningMaterial(var id: Int,
                             var type: String,

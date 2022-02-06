@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.work.*
 import com.example.liteeducation.R
 import com.example.liteeducation.data.extentions.getLearningMaterial
-import com.example.liteeducation.data.notification.NotificationHelper
+import com.example.liteeducation.notification.NotificationHelper
 import kotlinx.coroutines.*
 
 class DownloadWorkManager constructor(private var context: Context, parameters: WorkerParameters)
