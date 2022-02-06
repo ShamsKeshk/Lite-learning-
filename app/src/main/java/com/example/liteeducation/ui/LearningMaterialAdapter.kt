@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.liteeducation.databinding.ListItemLearningMaterialBinding
 import com.example.liteeducation.data.model.LearningMaterial
 import com.example.liteeducation.data.model.LearningMaterialFactory
+import com.example.liteeducation.data.model.Result
+import com.example.liteeducation.data.model.getDownloadProgress
 
 class LearningMaterialAdapter(val clickListener: LearningMaterialClickLister) : ListAdapter<LearningMaterial, LearningMaterialAdapter.ViewHolder>(
     DIFF_UTIL
@@ -38,6 +40,12 @@ class LearningMaterialAdapter(val clickListener: LearningMaterialClickLister) : 
 
             val imageResource = LearningMaterialFactory.getImageResourceFor(learningMaterial)
             binding.ivLearningItemPreview.setImageResource(imageResource)
+
+            if (learningMaterial.downloadState is Result.LoadingProgress){
+                binding.downloadProgress = (learningMaterial.downloadState as Result.LoadingProgress<String>).progress
+            }else {
+                binding.downloadProgress = 0
+            }
         }
     }
 
@@ -49,12 +57,16 @@ class LearningMaterialAdapter(val clickListener: LearningMaterialClickLister) : 
             }
 
             override fun areContentsTheSame(oldItem: LearningMaterial, newItem: LearningMaterial): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.id == newItem.id && oldItem.getDownloadProgress() == newItem.getDownloadProgress()
             }
         }
     }
 
     interface LearningMaterialClickLister {
         fun onMaterialSelected(learningMaterial: LearningMaterial)
+    }
+
+    override fun setHasStableIds(hasStableIds: Boolean) {
+        super.setHasStableIds(true)
     }
 }
