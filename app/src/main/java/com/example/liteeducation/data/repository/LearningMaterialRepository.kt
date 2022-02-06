@@ -83,7 +83,11 @@ constructor(private val remoteLearningDataSource: RemoteLearningDataSource,
 
             result.data.forEachIndexed { index, learningMaterial ->
                 if (learningMaterial.id == itemId){
-                    learningMaterial.downloadState = Result.LoadingProgress(progressValue)
+                    if(progressValue >= 100){
+                        learningMaterial.downloadState = Result.Success("Downloaded media path")
+                    }else {
+                        learningMaterial.downloadState = Result.LoadingProgress(progressValue)
+                    }
                     learningDownloadsResult.postValue(index)
                     return@launch
                 }

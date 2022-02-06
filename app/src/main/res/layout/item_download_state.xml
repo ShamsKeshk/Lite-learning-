@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <variable
+            name="downloadResult"
+            type="com.example.liteeducation.data.model.Result" />
 
         <variable
             name="downloadProgress"
@@ -18,7 +22,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin_default"
-            android:src="@drawable/ic_download_30" />
+            app:updateDownloadImage="@{downloadResult}" />
 
         <ProgressBar
             android:id="@+id/progress_bar_download"
@@ -27,7 +31,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin_default"
-            android:background="@drawable/circle_shape"
+            app:updateDownloadProgress="@{downloadResult}"
             android:indeterminate="false"
             android:max="100"
             android:progress="@{downloadProgress}"

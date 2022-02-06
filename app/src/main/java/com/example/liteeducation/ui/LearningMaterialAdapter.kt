@@ -35,16 +35,20 @@ class LearningMaterialAdapter(val clickListener: LearningMaterialClickLister) : 
         }
 
         fun bindItem(learningMaterial: LearningMaterial){
+            binding.downloadResult = learningMaterial.downloadState
+
             binding.tvLearningItemName.text = learningMaterial.name
             binding.tvLearningItemType.text = learningMaterial.type
 
             val imageResource = LearningMaterialFactory.getImageResourceFor(learningMaterial)
             binding.ivLearningItemPreview.setImageResource(imageResource)
 
-            if (learningMaterial.downloadState is Result.LoadingProgress){
-                binding.downloadProgress = (learningMaterial.downloadState as Result.LoadingProgress<String>).progress
-            }else {
-                binding.downloadProgress = 0
+            when (learningMaterial.downloadState) {
+                is Result.LoadingProgress -> {
+                    binding.downloadProgress = (learningMaterial.downloadState as Result.LoadingProgress<String>).progress
+                }else -> {
+                    binding.downloadProgress = 0
+                }
             }
         }
     }
