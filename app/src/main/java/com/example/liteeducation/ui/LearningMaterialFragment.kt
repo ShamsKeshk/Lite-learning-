@@ -5,13 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.work.*
+import com.example.liteeducation.BaseFragment
+import com.example.liteeducation.data.extentions.getProgressAsInt
+import com.example.liteeducation.data.extentions.putLearningMaterial
 import com.example.liteeducation.databinding.FragmentLearningMaterialBinding
 import com.example.liteeducation.data.model.LearningMaterial
 import com.example.liteeducation.data.model.Result
+import com.example.liteeducation.data.remote.services.DownloadWorkManager
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
@@ -20,7 +24,17 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 
 @AndroidEntryPoint
-class LearningMaterialFragment : Fragment() , LearningMaterialAdapter.LearningMaterialClickLister {
+class LearningMaterialFragment : BaseFragment() , LearningMaterialAdapter.LearningMaterialClickLister {
+
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         * @return A new instance of fragment LearningMaterialFragment.
+         */
+        @JvmStatic
+        fun newInstance() = LearningMaterialFragment()
+    }
 
     private lateinit var binding: FragmentLearningMaterialBinding
 
@@ -29,6 +43,9 @@ class LearningMaterialFragment : Fragment() , LearningMaterialAdapter.LearningMa
     private val adapter : LearningMaterialAdapter by lazy {
         LearningMaterialAdapter(this)
     }
+
+    @Inject
+    lateinit var downloadRequestBuilder : OneTimeWorkRequest.Builder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +63,8 @@ class LearningMaterialFragment : Fragment() , LearningMaterialAdapter.LearningMa
 
             binding.swipeRefreshLearningData.isRefreshing = false
         }
+
+        binding.rvLearningMaterial.itemAnimator = null
 
         binding.rvLearningMaterial.adapter = adapter
 
@@ -65,47 +84,51 @@ class LearningMaterialFragment : Fragment() , LearningMaterialAdapter.LearningMa
 
     private fun initLearningMaterialObserver(){
 
-        viewModel.getLearningMaterialResult().observe(viewLifecycleOwner , Observer {
-           binding.dataState = it
+        viewModel.getLearningMaterialResult().observe(viewLifecycleOwner) {
+            binding.dataState = it
 
-            when(it){
-                is Result.Success -> {
-                    adapter.submitList(it.data)
-                }
+            if (it is Result.Success) {
+                adapter.submitList(it.data)
             }
-        })
+        }
 
-        viewModel.getDownloadProgressResult().observe(viewLifecycleOwner, Observer {
+        viewModel.getDownloadProgressResult().observe(viewLifecycleOwner) {
             it?.let {
                 adapter.notifyItemChanged(it)
                 viewModel.updateProgressDone()
             }
-        })
+        }
     }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         * @return A new instance of fragment LearningMaterialFragment.
-         */
-        @JvmStatic
-        fun newInstance() = LearningMaterialFragment()
-    }
-
-    private var toast : Toast? = null
 
     override fun onMaterialSelected(learningMaterial: LearningMaterial) {
-        Toast.makeText(context,"Clicked :${learningMaterial.name}",Toast.LENGTH_LONG).show()
+        downloadMediaFor(learningMaterial)
     }
 
-    private fun displayMessage(message: String){
-        toast?.let {
-            it.cancel()
-        }
+    private fun downloadMediaFor(learningMaterial: LearningMaterial) {
+        val work: OneTimeWorkRequest = getDownloadWorkFor(learningMaterial)
 
-        toast = Toast.makeText(requireContext(),message,Toast.LENGTH_LONG).apply {
-            show()
-        }
+        WorkManager.getInstance(requireContext()).enqueue(work)
+
+        initObserverForDownloadWork(work,learningMaterial)
+    }
+
+    private fun initObserverForDownloadWork(work: OneTimeWorkRequest,learningMaterial: LearningMaterial){
+        WorkManager.getInstance(requireActivity().applicationContext)
+            .getWorkInfoByIdLiveData(work.id)
+            .observe(this) {
+                it?.run {
+                    val progress = getProgressAsInt()
+                    if (progress != -1) {
+                        viewModel.updateDownloadProgressFor(learningMaterial.id, progress)
+                    }
+                }
+            }
+    }
+
+    private fun getDownloadWorkFor(learningMaterial: LearningMaterial): OneTimeWorkRequest{
+        val data = Data.Builder()
+        data.putLearningMaterial(DownloadWorkManager.KEY_LEARNING_ITEM, learningMaterial)
+
+        return downloadRequestBuilder.setInputData(data.build()).build()
     }
 }

@@ -1,14 +1,11 @@
 package com.example.liteeducation.data.remote.services
 
 import android.content.Context
-import androidx.work.CoroutineWorker
-import androidx.work.ForegroundInfo
-import androidx.work.WorkerParameters
-import androidx.work.workDataOf
+import androidx.work.*
 import com.example.liteeducation.R
+import com.example.liteeducation.data.extentions.getLearningMaterial
 import com.example.liteeducation.data.notification.NotificationHelper
-import kotlinx.coroutines.delay
-import java.lang.Exception
+import kotlinx.coroutines.*
 
 class DownloadWorkManager constructor(private var context: Context, parameters: WorkerParameters)
     : CoroutineWorker(context,parameters){
@@ -16,23 +13,15 @@ class DownloadWorkManager constructor(private var context: Context, parameters: 
     private lateinit var name: String
 
     override suspend fun doWork(): Result {
-//        val learningMaterial =  inputData.getLearningMaterial(KEY_LEARNING_ITEM)
-//        val urlPath =  learningMaterial?.url
-        try {
-            val firstUpdate = workDataOf(Progress to 20)
-            val middleUpdate = workDataOf(Progress to 50)
-            val lastUpdate = workDataOf(Progress to 80)
+        val learningMaterial =  inputData.getLearningMaterial(KEY_LEARNING_ITEM)
+        val urlPath =  learningMaterial?.url
 
-            setProgress(firstUpdate)
-        delay(delayDuration)
-            setProgress(middleUpdate)
-        delay(delayDuration)
-            setProgress(lastUpdate)
-            return Result.success()
-
-        } catch (e: Exception) {
-            return Result.failure()
+        (1..105).forEach {
+            delay(300)
+            setProgress(workDataOf(Progress to it))
         }
+
+        return Result.success()
     }
 
 
