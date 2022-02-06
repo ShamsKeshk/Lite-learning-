@@ -74,6 +74,13 @@ class LearningMaterialFragment : Fragment() , LearningMaterialAdapter.LearningMa
                 }
             }
         })
+
+        viewModel.getDownloadProgressResult().observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.notifyItemChanged(it)
+                viewModel.updateProgressDone()
+            }
+        })
     }
 
     companion object {

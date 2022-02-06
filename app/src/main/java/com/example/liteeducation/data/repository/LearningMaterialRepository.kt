@@ -20,6 +20,7 @@ constructor(private val remoteLearningDataSource: RemoteLearningDataSource,
             private val localLearningDataSource: LocalLearningDataSource) {
 
     private val learningMaterialsResult = MutableLiveData<Result<List<LearningMaterial>>>()
+    private val learningDownloadsResult = MutableLiveData<Int?>()
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
@@ -60,4 +61,34 @@ constructor(private val remoteLearningDataSource: RemoteLearningDataSource,
     fun getLearningMaterialResult() : LiveData<Result<List<LearningMaterial>>> {
         return learningMaterialsResult
     }
+
+    fun getDownloadProgressResult() : LiveData<Int?>{
+        return learningDownloadsResult
+    }
+
+    fun updateProgressDone(){
+        learningDownloadsResult.value = null
+    }
+
+    @WorkerThread
+    suspend fun updateProgressForItem(itemId: Int, progressValue: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = getLearningMaterialResult().value
+
+            if (result !is Result.Success)
+                return@launch
+
+            if (result.data.isEmpty())
+                return@launch
+
+            result.data.forEachIndexed { index, learningMaterial ->
+                if (learningMaterial.id == itemId){
+                    learningMaterial.downloadState = Result.LoadingProgress(progressValue)
+                    learningDownloadsResult.postValue(index)
+                    return@launch
+                }
+            }
+        }
+    }
+
 }

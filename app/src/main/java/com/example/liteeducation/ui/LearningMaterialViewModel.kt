@@ -15,7 +15,7 @@ class LearningMaterialViewModel
 @Inject constructor(private val learningMaterialRepo: LearningMaterialRepository) : ViewModel() {
 
 
-    fun refreshData(){
+    fun refreshData() {
         viewModelScope.launch {
             learningMaterialRepo.forceSyncRemoteLearningMaterial()
         }
@@ -23,5 +23,19 @@ class LearningMaterialViewModel
 
     fun getLearningMaterialResult() : LiveData<Result<List<LearningMaterial>>> {
         return learningMaterialRepo.getLearningMaterialResult()
+    }
+
+    fun updateDownloadProgressFor(itemId: Int, progressValue: Int) {
+        viewModelScope.launch {
+            learningMaterialRepo.updateProgressForItem(itemId, progressValue)
+        }
+    }
+
+    fun getDownloadProgressResult() : LiveData<Int?>{
+        return learningMaterialRepo.getDownloadProgressResult()
+    }
+
+    fun updateProgressDone(){
+        learningMaterialRepo.updateProgressDone()
     }
 }
