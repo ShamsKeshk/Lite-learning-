@@ -20,3 +20,8 @@ fun LearningMaterial.getDownloadProgress(): Int = when(downloadState){
     else -> -1
 }
 
+fun LearningMaterial.isDownloaded(): Boolean = when(downloadState){
+    is Result.Success -> true
+    else -> false
+}
+

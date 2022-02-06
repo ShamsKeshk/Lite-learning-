@@ -8,4 +8,6 @@
     <string name="download_channel_description">To Display notification while download and resource, so you can keep tracking of it.</string>
     <string name="download_notification_title">Lite Learning</string>
     <string name="download_notification_description">Downloading %1$s in progress …</string>
+    <string name="item_already_downloaded_message">Hi Dear, there is no Media Player Integrated Yet, will be Delivered Soon .. :)</string>
+    <string name="item_downloading_message">Item Downloading in Progress … </string>
 </resources>

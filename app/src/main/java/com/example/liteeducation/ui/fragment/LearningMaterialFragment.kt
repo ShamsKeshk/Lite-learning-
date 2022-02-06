@@ -5,14 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.*
+import com.example.liteeducation.BaseFragment
+import com.example.liteeducation.R
 import com.example.liteeducation.data.extentions.getProgressAsInt
 import com.example.liteeducation.data.extentions.putLearningMaterial
 import com.example.liteeducation.databinding.FragmentLearningMaterialBinding
 import com.example.liteeducation.model.LearningMaterial
 import com.example.liteeducation.model.Result
 import com.example.liteeducation.data.remote.services.DownloadWorkManager
+import com.example.liteeducation.model.getDownloadProgress
+import com.example.liteeducation.model.isDownloaded
 import com.example.liteeducation.ui.interfaces.RetryCallback
 import com.example.liteeducation.ui.adapters.LearningMaterialAdapter
 import com.example.liteeducation.ui.viewmodel.LearningMaterialViewModel
@@ -26,7 +31,7 @@ import javax.inject.Inject
  */
 
 @AndroidEntryPoint
-class LearningMaterialFragment : Fragment() , LearningMaterialAdapter.LearningMaterialClickLister {
+class LearningMaterialFragment : BaseFragment() , LearningMaterialAdapter.LearningMaterialClickLister {
 
     companion object {
         /**
@@ -102,8 +107,16 @@ class LearningMaterialFragment : Fragment() , LearningMaterialAdapter.LearningMa
         }
     }
 
+
     override fun onMaterialSelected(learningMaterial: LearningMaterial) {
-        downloadMediaFor(learningMaterial)
+        if (learningMaterial.isDownloaded()){
+            displayMessage(getString(R.string.item_already_downloaded_message))
+        }else if (learningMaterial.getDownloadProgress() > -1){
+            displayMessage(getString(R.string.item_downloading_message))
+        }else {
+            downloadMediaFor(learningMaterial)
+        }
+
     }
 
     private fun downloadMediaFor(learningMaterial: LearningMaterial) {
